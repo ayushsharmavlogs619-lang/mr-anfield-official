@@ -108,7 +108,7 @@ export default function Home() {
                 Anfield Reimagined: The Future of the Historic Stand
               </h1>
               <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed font-medium">
-                Deep dive into the club's long-term vision for the stadium expansion and how it will transform the atmosphere on European nights.
+                Deep dive into the club&apos;s long-term vision for the stadium expansion and how it will transform the atmosphere on European nights.
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
