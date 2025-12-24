@@ -30,23 +30,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 selection:bg-[#c8102e]/30 font-sans pb-20">
-      {/* 🔴 HEADER */}
-      <header className="sticky top-0 z-50 bg-gradient-to-b from-[#c8102e] to-black/80 backdrop-blur-lg border-b border-white/10 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-white p-1 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-              <Image src="/logo.png" alt="LFC" width={48} height={48} className="object-contain" />
-            </div>
-            <h1 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white leading-none">
-              MR ANFIELD<br /><span className="text-[#f6eb61] text-lg">FOOTBALL</span>
-            </h1>
-          </div>
-          <button title="Menu" className="p-2 bg-white/10 rounded-xl border border-white/10">
-            <Menu className="w-6 h-6 text-white" />
-          </button>
-        </div>
-      </header>
-
       {/* ⚡ BREAKING NEWS TICKER */}
       <div className="bg-[#c8102e] py-2 overflow-hidden border-b border-white/10 shadow-[0_4px_20px_rgba(200,16,46,0.3)]">
         <div className="flex whitespace-nowrap animate-marquee">
@@ -114,7 +97,7 @@ export default function Home() {
                 placeholder="Enter your email..."
                 className="w-full bg-zinc-900 border border-white/10 rounded-2xl px-6 py-5 text-white outline-none focus:border-[#f6eb61]/50 transition-all font-bold"
               />
-              <button className="w-full py-5 bg-rev-gradient text-black font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-[1.02] transition-all animate-pulse-glow flex items-center justify-center gap-3">
+              <button className="w-full py-5 bg-rev-gradient text-black font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-[1.02] transition-all animate-pulse-glow flex items-center justify-center gap-3" title="Subscribe to News">
                 <Send className="w-5 h-5" /> Subscribe
               </button>
             </div>
@@ -195,34 +178,6 @@ export default function Home() {
                   <span className="text-[10px] font-black uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full">{m.v}</span>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 🛡️ LEGAL FOOTER */}
-        <section className="py-20 border-t border-white/10 space-y-12">
-          <div className="grid grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-black uppercase tracking-tighter flex items-center gap-3 italic">
-                <Shield className="w-6 h-6 text-zinc-500" /> LEGAL
-              </h3>
-              <div className="space-y-4">
-                {['Privacy Policy', 'Terms & Conditions', 'Copyright Info'].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-zinc-500 hover:text-white cursor-pointer font-bold transition-all">
-                    <Zap className="w-3 h-3 text-zinc-700" /> {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="text-center pt-20 space-y-4">
-            <p className="text-xs font-bold tracking-widest text-zinc-600 uppercase">
-              © 2025 Mr Anfield Football. Made with <span className="text-red-600">❤️</span> for Liverpool FC
-            </p>
-            <div className="flex justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-zinc-700">
-              <span>Terms & Conditions</span>
-              <span>Privacy Policy</span>
-              <span className="flex items-center gap-1"><Shield className="w-3 h-3" /> Copyright Protected</span>
             </div>
           </div>
         </section>
