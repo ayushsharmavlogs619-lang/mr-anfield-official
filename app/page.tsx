@@ -16,40 +16,14 @@ import {
   ExternalLink
 } from "lucide-react";
 
-export default function Home() {
-  const trendingNews = [
-    { title: "Klopp's Legacy: Five years since the Madrid triumph", time: "2h ago", tag: "Editorial" },
-    { title: "Transfer Update: Midfield target spotted in Liverpool", time: "5h ago", tag: "Rumors" },
-    { title: "Injury News: Key defender returns to full training", time: "8h ago", tag: "Team News" },
-    { title: "Tactical Analysis: How slot is evolving the high press", time: "1d ago", tag: "Analysis" },
-  ];
+import { HERO_ARTICLE, UPCOMING_MATCH, LATEST_NEWS, TRENDING_NEWS } from "@/app/lib/data";
 
-  const newsGrid = [
-    {
-      title: "Liverpool secured dramatic late winner at Anfield",
-      excerpt: "A look back at the most emotional moments under the lights as Anfield roared the Reds to victory...",
-      image: "https://images.unsplash.com/photo-1543351611-58f69d7c1781?q=80&w=800&auto=format&fit=crop",
-      category: "Match Report",
-      author: "James Pearce",
-      date: "Oct 24, 2025"
-    },
-    {
-      title: "Inside the Scouting: The Next Generation of Reds",
-      excerpt: "Our deep dive into the academy structure and the rising stars pushing for a first-team place this season.",
-      image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop",
-      category: "Feature",
-      author: "Melissa Reddy",
-      date: "Oct 23, 2025"
-    },
-    {
-      title: "Exclusive: Transfer targets for the Winter Window",
-      excerpt: "We break down the three key positions the recruitment team is looking to bolster in January.",
-      image: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?q=80&w=800&auto=format&fit=crop",
-      category: "Transfer News",
-      author: "Fabrizio Romano",
-      date: "Oct 22, 2025"
-    }
-  ];
+export default function Home() {
+  // Data is now fetched from the central store, ready for API replacement.
+  const heroPost = HERO_ARTICLE;
+  const trendingNews = TRENDING_NEWS;
+  const matchData = UPCOMING_MATCH; // I need to add this to data.ts first if I missed it, checking my previous write.
+  const newsGrid = LATEST_NEWS;
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 selection:bg-[#c8102e]/30">
@@ -99,22 +73,22 @@ export default function Home() {
             </div>
             <div className="absolute bottom-0 left-0 z-20 p-8 md:p-12 w-full">
               <div className="flex items-center gap-3 mb-4">
-                <span className="px-4 py-1.5 bg-[#c8102e] text-white text-[10px] font-black uppercase tracking-widest rounded-full">MUST READ</span>
+                <span className="px-4 py-1.5 bg-[#c8102e] text-white text-[10px] font-black uppercase tracking-widest rounded-full">{heroPost.category}</span>
                 <span className="flex items-center gap-1.5 text-zinc-400 text-xs font-medium">
-                  <Clock className="w-3 h-3" /> 15 min read
+                  <Clock className="w-3 h-3" /> {heroPost.readTime}
                 </span>
               </div>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-6 tracking-tight text-white group-hover:text-zinc-200 transition-colors">
-                Anfield Reimagined: The Future of the Historic Stand
+                {heroPost.title}
               </h1>
               <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed font-medium">
-                Deep dive into the club&apos;s long-term vision for the stadium expansion and how it will transform the atmosphere on European nights.
+                {heroPost.excerpt}
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-zinc-700 border border-white/10" />
                   <div>
-                    <div className="text-sm font-bold text-white leading-none">Oliver Kay</div>
+                    <div className="text-sm font-bold text-white leading-none">{heroPost.author}</div>
                     <div className="text-xs text-zinc-500 font-medium mt-1">Senior Correspondent</div>
                   </div>
                 </div>
@@ -156,18 +130,18 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="p-4 rounded-2xl bg-black/40 border border-white/5">
                   <div className="flex items-center justify-between mb-4 text-[10px] font-black text-zinc-600 uppercase tracking-widest">
-                    <span>Premier League</span>
-                    <span className="text-[#c8102e]">Full Time</span>
+                    <span>{matchData.league}</span>
+                    <span className="text-[#c8102e]">{matchData.status}</span>
                   </div>
                   <div className="flex items-center justify-between text-xl font-black">
                     <div className="flex flex-col items-center gap-2">
                       <div className="w-10 h-10 rounded-full bg-zinc-800 border border-white/10" />
-                      <span className="text-[10px] uppercase tracking-wider">LFC</span>
+                      <span className="text-[10px] uppercase tracking-wider">{matchData.homeTeam}</span>
                     </div>
-                    <div className="text-3xl">3 - 1</div>
+                    <div className="text-3xl">{matchData.homeScore} - {matchData.awayScore}</div>
                     <div className="flex flex-col items-center gap-2">
                       <div className="w-10 h-10 rounded-full bg-zinc-800 border border-white/10" />
-                      <span className="text-[10px] uppercase tracking-wider">MCFC</span>
+                      <span className="text-[10px] uppercase tracking-wider">{matchData.awayTeam}</span>
                     </div>
                   </div>
                   <div className="mt-4 pt-4 border-t border-white/5 text-center">
