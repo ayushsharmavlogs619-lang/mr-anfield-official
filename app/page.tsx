@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import Image from "next/image";
 import {
   TrendingUp,
@@ -13,282 +14,219 @@ import {
   Star,
   Zap,
   Clock,
-  ExternalLink
+  ExternalLink,
+  Shield,
+  User,
+  Send
 } from "lucide-react";
 
 import { HERO_ARTICLE, UPCOMING_MATCH, LATEST_NEWS, TRENDING_NEWS } from "@/app/lib/data";
 
 export default function Home() {
-  // Data is now fetched from the central store, ready for API replacement.
   const heroPost = HERO_ARTICLE;
   const trendingNews = TRENDING_NEWS;
-  const matchData = UPCOMING_MATCH; // I need to add this to data.ts first if I missed it, checking my previous write.
+  const matchData = UPCOMING_MATCH;
   const newsGrid = LATEST_NEWS;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 selection:bg-[#c8102e]/30">
-      {/* Top Bar Navigation */}
-      <nav className="sticky top-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-[#c8102e] rounded-lg flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-black italic tracking-tighter text-white uppercase">MR. ANFIELD</span>
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 selection:bg-[#c8102e]/30 font-sans pb-20">
+      {/* 🔴 HEADER */}
+      <header className="sticky top-0 z-50 bg-gradient-to-b from-[#c8102e] to-black/80 backdrop-blur-lg border-b border-white/10 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-white p-1 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+              <Image src="/logo.png" alt="LFC" width={48} height={48} className="object-contain" />
             </div>
-            <div className="hidden lg:flex gap-10 text-xs font-black uppercase tracking-[0.2em] text-zinc-500">
-              <a href="#" className="hover:text-[#c8102e] transition-colors text-zinc-100 border-b-2 border-[#c8102e] pb-1">News</a>
-              <a href="#" className="hover:text-[#c8102e] transition-colors">Transfers</a>
-              <a href="#" className="hover:text-[#c8102e] transition-colors">Tactics</a>
-              <a href="#" className="hover:text-[#c8102e] transition-colors">Academy</a>
-            </div>
+            <h1 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white leading-none">
+              MR ANFIELD<br /><span className="text-[#f6eb61] text-lg">FOOTBALL</span>
+            </h1>
           </div>
-          <div className="flex items-center gap-6">
-            <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/5 text-sm text-zinc-400">
-              <Search className="w-4 h-4" />
-              <input type="text" placeholder="Search news..." className="bg-transparent border-none outline-none w-32" />
-            </div>
-            <button className="p-2 hover:bg-white/5 rounded-full transition-colors">
-              <Menu className="w-6 h-6" />
-            </button>
-          </div>
+          <button title="Menu" className="p-2 bg-white/10 rounded-xl border border-white/10">
+            <Menu className="w-6 h-6 text-white" />
+          </button>
         </div>
-      </nav>
+      </header>
 
-      {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Main Feature */}
-          <div className="lg:col-span-8 group relative overflow-hidden rounded-[2.5rem] bg-zinc-900 border border-white/5 shadow-2xl">
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/40 to-transparent" />
-            <div className="relative aspect-[16/9] w-full">
-              <Image
-                src="/stadium.png"
-                alt="Featured News"
-                fill
-                priority
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+      {/* ⚡ BREAKING NEWS TICKER */}
+      <div className="bg-[#c8102e] py-2 overflow-hidden border-b border-white/10 shadow-[0_4px_20px_rgba(200,16,46,0.3)]">
+        <div className="flex whitespace-nowrap animate-marquee">
+          {[...TRENDING_NEWS, ...TRENDING_NEWS].map((news, i) => (
+            <span key={i} className="mx-10 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.1em] text-white">
+              <Zap className="w-3 h-3 fill-current text-[#f6eb61]" /> {news.tag}: {news.title}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <main className="max-w-7xl mx-auto px-6 pt-10 space-y-12">
+        {/* 🔥 BREAKING FROM ANFIELD SECTION */}
+        <section className="space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-700">
+          <div className="text-center space-y-4">
+            <div className="flex justify-center items-center gap-3">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl">
+                <span className="text-2xl animate-pulse">🔥</span>
+              </div>
             </div>
-            <div className="absolute bottom-0 left-0 z-20 p-8 md:p-12 w-full">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-4 py-1.5 bg-[#c8102e] text-white text-[10px] font-black uppercase tracking-widest rounded-full">{heroPost.category}</span>
-                <span className="flex items-center gap-1.5 text-zinc-400 text-xs font-medium">
-                  <Clock className="w-3 h-3" /> {heroPost.readTime}
+            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none italic text-white drop-shadow-2xl">
+              BREAKING FROM<br /><span className="text-[#c8102e]">ANFIELD</span>
+            </h2>
+            <p className="text-zinc-400 font-medium max-w-md mx-auto">The hottest Liverpool FC news that's got everyone talking 🚀</p>
+          </div>
+
+          {/* MAIN HERO CARD */}
+          <Link href={`/news/${heroPost.id}`} className="block group">
+            <div className="relative aspect-[16/9] w-full rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
+              <Image src="/stadium.png" alt="Hero" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+              <div className="absolute top-6 left-6">
+                <span className="px-5 py-2 bg-[#c8102e] text-white text-[10px] font-black uppercase tracking-widest rounded-xl border border-white/20">
+                  {heroPost.category}
                 </span>
               </div>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-6 tracking-tight text-white group-hover:text-zinc-200 transition-colors">
+            </div>
+            <div className="px-4 py-8 space-y-4">
+              <h3 className="text-3xl md:text-5xl font-black text-white leading-tight transition-colors group-hover:text-[#c8102e]">
                 {heroPost.title}
-              </h1>
-              <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed font-medium">
+              </h3>
+              <p className="text-zinc-500 text-lg leading-relaxed line-clamp-3">
                 {heroPost.excerpt}
               </p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-zinc-700 border border-white/10" />
-                  <div>
-                    <div className="text-sm font-bold text-white leading-none">{heroPost.author}</div>
-                    <div className="text-xs text-zinc-500 font-medium mt-1">Senior Correspondent</div>
+            </div>
+          </Link>
+        </section>
+
+        {/* 👑 JOIN THE REVOLUTION SECTION */}
+        <section className="relative py-16 px-8 rounded-[3rem] overflow-hidden bg-black border border-white/5">
+          <div className="absolute top-0 right-0 p-8 opacity-5">
+            <Trophy className="w-48 h-48 text-[#f6eb61]" />
+          </div>
+          <div className="relative z-10 text-center space-y-10 max-w-xl mx-auto">
+            <div className="space-y-4">
+              <Zap className="w-12 h-12 text-[#f6eb61] mx-auto animate-bounce" />
+              <h2 className="text-4xl md:text-6xl font-black text-white leading-none uppercase tracking-tighter italic">
+                JOIN THE <span className="text-[#c8102e]">REDS</span><br />REVOLUTION!
+              </h2>
+              <p className="text-zinc-400 font-bold">Get breaking Liverpool FC news before anyone else! 🔥</p>
+            </div>
+            <div className="space-y-4">
+              <input
+                type="email"
+                placeholder="Enter your email..."
+                className="w-full bg-zinc-900 border border-white/10 rounded-2xl px-6 py-5 text-white outline-none focus:border-[#f6eb61]/50 transition-all font-bold"
+              />
+              <button className="w-full py-5 bg-rev-gradient text-black font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-[1.02] transition-all animate-pulse-glow flex items-center justify-center gap-3">
+                <Send className="w-5 h-5" /> Subscribe
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* 📊 GRID SECTION: TRENDING & LISTS */}
+        <section className="grid md:grid-cols-2 gap-12">
+          {/* LATEST LIST */}
+          <div className="space-y-8">
+            <h3 className="text-2xl font-black uppercase tracking-tighter flex items-center gap-3 italic text-white">
+              <span className="text-2xl">🔥</span> LATEST
+            </h3>
+            <div className="space-y-4">
+              {newsGrid.slice(0, 4).map((item, i) => (
+                <Link href={`/news/${item.id}`} key={i} className="flex items-center justify-between p-6 rounded-2xl bg-zinc-900/50 border border-white/5 hover:bg-zinc-800 transition-all cursor-pointer group">
+                  <div className="flex items-center gap-4">
+                    <Zap className="w-4 h-4 text-[#c8102e]" />
+                    <div>
+                      <span className="font-bold text-lg group-hover:text-[#c8102e] block">{item.title}</span>
+                      <span className="text-xs text-zinc-500 uppercase font-black tracking-widest">{item.category} • {item.date}</span>
+                    </div>
                   </div>
-                </div>
-                <button className="flex items-center gap-2 text-[#c8102e] font-black text-sm uppercase tracking-widest group/btn">
-                  Read Article <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </button>
-              </div>
+                  <ChevronRight className="w-5 h-5 text-zinc-600 group-hover:translate-x-1 transition-all" />
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Sidebar Trending */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            <div className="p-8 rounded-[2rem] bg-[#c8102e]/5 border border-[#c8102e]/10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4 opacity-10">
-                <TrendingUp className="w-16 h-16 text-[#c8102e]" />
-              </div>
-              <h3 className="text-xl font-black uppercase tracking-tighter mb-8 flex items-center gap-2">
-                <Zap className="w-5 h-5 text-[#c8102e] fill-current" /> Trending Now
-              </h3>
-              <div className="space-y-8">
-                {trendingNews.map((news, i) => (
-                  <div key={i} className="group cursor-pointer">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#c8102e]">{news.tag}</span>
-                      <span className="text-[10px] text-zinc-600 font-bold">• {news.time}</span>
+          {/* EXCLUSIVE LIST (Trending News as stand-in for exclusive content) */}
+          <div className="space-y-8">
+            <h3 className="text-2xl font-black uppercase tracking-tighter flex items-center gap-3 italic text-white">
+              <Zap className="w-6 h-6 text-[#f6eb61] fill-current" /> EXCLUSIVE
+            </h3>
+            <div className="space-y-4">
+              {trendingNews.map((item, i) => (
+                <Link href="/exclusive" key={i} className="flex items-center justify-between p-6 rounded-2xl bg-zinc-900/50 border border-white/5 hover:bg-zinc-800 transition-all cursor-pointer group">
+                  <div className="flex items-center gap-4">
+                    <Zap className="w-4 h-4 text-[#f6eb61]" />
+                    <div>
+                      <span className="font-bold text-lg group-hover:text-[#f6eb61] block">{item.title}</span>
+                      <span className="text-xs text-zinc-500 uppercase font-black tracking-widest">Premium Analysis • {item.tag}</span>
                     </div>
-                    <h4 className="text-base font-bold text-zinc-200 group-hover:text-white transition-colors line-clamp-2">
-                      {news.title}
-                    </h4>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-zinc-600 group-hover:translate-x-1 transition-all" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 📋 QUICK LINKS & MATCHES */}
+        <section className="grid md:grid-cols-2 gap-12 pt-12">
+          <div className="p-8 rounded-[2.5rem] bg-zinc-900/30 border border-white/10 space-y-6">
+            <h4 className="text-xl font-black uppercase italic">Quick Links</h4>
+            <div className="space-y-2">
+              {[{ n: 'Match Fixtures', i: Calendar }, { n: 'Player Stats', i: User }, { n: 'League Table', i: TrendingUp }].map((link, idx) => (
+                <div key={idx} className="flex items-center justify-between py-4 border-b border-white/5 last:border-0 hover:bg-white/5 px-2 rounded-lg transition-all cursor-pointer group">
+                  <div className="flex items-center gap-3">
+                    <link.i className="w-5 h-5 text-zinc-500" />
+                    <span className="font-bold">{link.n}</span>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-zinc-700 group-hover:text-white" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-8 rounded-[2.5rem] bg-zinc-900/30 border border-white/10 space-y-6">
+            <h4 className="text-xl font-black uppercase italic text-[#c8102e]">Upcoming Matches</h4>
+            <div className="space-y-4">
+              {[{ t: 'Manchester City', v: 'Anfield', d: 'March 20 • 17:30' }, { t: 'Arsenal', v: 'Emirates', d: 'March 27 • 14:00' }].map((m, idx) => (
+                <div key={idx} className="p-4 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center group hover:border-[#c8102e]/50 transition-all">
+                  <div>
+                    <div className="text-sm font-black text-zinc-500 uppercase tracking-widest mb-1">vs {m.t}</div>
+                    <div className="text-xs font-bold text-zinc-600">{m.d}</div>
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full">{m.v}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 🛡️ LEGAL FOOTER */}
+        <section className="py-20 border-t border-white/10 space-y-12">
+          <div className="grid grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-black uppercase tracking-tighter flex items-center gap-3 italic">
+                <Shield className="w-6 h-6 text-zinc-500" /> LEGAL
+              </h3>
+              <div className="space-y-4">
+                {['Privacy Policy', 'Terms & Conditions', 'Copyright Info'].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 text-zinc-500 hover:text-white cursor-pointer font-bold transition-all">
+                    <Zap className="w-3 h-3 text-zinc-700" /> {item}
                   </div>
                 ))}
               </div>
             </div>
-
-            <div className="p-8 rounded-[2rem] bg-zinc-900 border border-white/5">
-              <h3 className="text-xl font-black uppercase tracking-tighter mb-6 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-zinc-500" /> Match Center
-              </h3>
-              <div className="space-y-4">
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/5">
-                  <div className="flex items-center justify-between mb-4 text-[10px] font-black text-zinc-600 uppercase tracking-widest">
-                    <span>{matchData.league}</span>
-                    <span className="text-[#c8102e]">{matchData.status}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xl font-black">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-10 h-10 rounded-full bg-zinc-800 border border-white/10" />
-                      <span className="text-[10px] uppercase tracking-wider">{matchData.homeTeam}</span>
-                    </div>
-                    <div className="text-3xl">{matchData.homeScore} - {matchData.awayScore}</div>
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-10 h-10 rounded-full bg-zinc-800 border border-white/10" />
-                      <span className="text-[10px] uppercase tracking-wider">{matchData.awayTeam}</span>
-                    </div>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-white/5 text-center">
-                    <button className="text-[10px] font-black uppercase tracking-widest text-[#c8102e] hover:text-[#e01e37] transition-colors">
-                      View Match Stats
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-
-        {/* Categories / Grid Section */}
-        <section className="mt-24">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-black uppercase tracking-tighter flex items-center gap-3">
-              <Star className="w-8 h-8 text-[#c8102e] fill-current" /> Latest Updates
-            </h2>
-            <div className="flex gap-4">
-              <button className="p-3 bg-zinc-900 hover:bg-zinc-800 rounded-full border border-white/5 transition-all">
-                <ChevronRight className="w-4 h-4 rotate-180" />
-              </button>
-              <button className="p-3 bg-zinc-900 hover:bg-zinc-800 rounded-full border border-white/5 transition-all">
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {newsGrid.map((item, i) => (
-              <div key={i} className="group cursor-pointer">
-                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden mb-6 bg-zinc-900 border border-white/5 shadow-lg">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-black/60 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-widest rounded-full border border-white/10">
-                      {item.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-500">
-                    <span>{item.author}</span>
-                    <span>•</span>
-                    <span>{item.date}</span>
-                  </div>
-                  <h3 className="text-xl font-bold leading-tight text-white group-hover:text-[#c8102e] transition-colors line-clamp-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed line-clamp-2">
-                    {item.excerpt}
-                  </p>
-                  <div className="flex items-center gap-6 pt-2">
-                    <button className="flex items-center gap-1.5 text-zinc-600 hover:text-white transition-colors">
-                      <MessageSquare className="w-4 h-4" /> <span className="text-xs font-bold">24</span>
-                    </button>
-                    <button className="flex items-center gap-1.5 text-zinc-600 hover:text-white transition-colors">
-                      <Share2 className="w-4 h-4" /> <span className="text-xs font-bold">Share</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="mt-32 relative py-20 rounded-[3rem] overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#c8102e] to-[#800a1d]" />
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_20%_30%,white_0%,transparent_50%)]" />
-          <div className="relative z-10 text-center space-y-8 max-w-2xl mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-black text-white leading-tight uppercase italic tracking-tighter">
-              The Reds in your inbox
-            </h2>
-            <p className="text-white/80 text-lg font-medium">
-              Join 50,000+ Liverpool fans getting exclusive tactical breakdowns and transfer news delivered daily.
+          <div className="text-center pt-20 space-y-4">
+            <p className="text-xs font-bold tracking-widest text-zinc-600 uppercase">
+              © 2025 Mr Anfield Football. Made with <span className="text-red-600">❤️</span> for Liverpool FC
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-8 py-5 rounded-2xl bg-black/20 border border-white/10 placeholder:text-white/40 text-white outline-none focus:bg-black/40 transition-all font-bold"
-              />
-              <button className="px-10 py-5 bg-white text-[#c8102e] rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-zinc-100 transition-all shadow-xl">
-                Subscribe
-              </button>
+            <div className="flex justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-zinc-700">
+              <span>Terms & Conditions</span>
+              <span>Privacy Policy</span>
+              <span className="flex items-center gap-1"><Shield className="w-3 h-3" /> Copyright Protected</span>
             </div>
-            <p className="text-white/40 text-[10px] font-black uppercase tracking-widest">
-              Unsubscribe anytime. Privacy policy applies.
-            </p>
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="mt-32 pb-20 px-4 md:px-8 border-t border-white/5">
-        <div className="max-w-7xl mx-auto pt-20">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div className="space-y-6">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-[#c8102e] rounded-lg flex items-center justify-center">
-                  <Trophy className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-xl font-black italic tracking-tighter text-white uppercase">MR. ANFIELD</span>
-              </div>
-              <p className="text-zinc-500 text-sm leading-relaxed font-medium">
-                The ultimate destination for Liverpool FC fans. Tactical analysis, transfer rumors, and in-depth stories from inside Anfield.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white mb-6">Explore</h4>
-              <ul className="space-y-4 text-sm font-bold text-zinc-500">
-                <li><a href="#" className="hover:text-white transition-colors">Latest News</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Match Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">The Kop Chat</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Premium Analysis</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white mb-6">Support</h4>
-              <ul className="space-y-4 text-sm font-bold text-zinc-500">
-                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Our Writers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="/privacy" className="hover:text-white transition-colors">Privacy</a></li>
-                <li><a href="/terms" className="hover:text-white transition-colors">Terms</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white mb-6">Official Partners</h4>
-              <div className="flex items-center gap-4 text-zinc-700">
-                <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5" />
-                <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5" />
-                <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5" />
-              </div>
-              <p className="mt-6 text-[10px] font-black uppercase tracking-[0.3em] text-[#c8102e] flex items-center gap-2">
-                MADE BY FANS FOR FANS <ExternalLink className="w-3 h-3" />
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

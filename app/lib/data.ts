@@ -1,92 +1,55 @@
-
-export interface MatchStats {
-    homeTeam: string;
-    awayTeam: string;
-    homeScore: number;
-    awayScore: number;
-    league: string;
-    status: string;
-}
-
-export const UPCOMING_MATCH: MatchStats = {
-    homeTeam: "LFC",
-    awayTeam: "MCFC",
-    homeScore: 3,
-    awayScore: 1,
-    league: "Premier League",
-    status: "Full Time"
+export const HERO_ARTICLE = {
+    id: "liverpool-tactical-masterclass",
+    category: "Tactics",
+    readTime: "8 min read",
+    title: "The Slot Era: How Liverpool's Midfield Box is Dominating Europe",
+    excerpt: "From double pivots to inverted wing-backs, we break down the tactical evolution at Anfield that has the Reds top of the table.",
+    author: "James Pearce",
+    image: "/stadium.png"
 };
 
-export interface Article {
-    id: string;
-    title: string;
-    excerpt: string;
-    image: string;
-    category: string;
-    author: string;
-    date: string;
-    readTime: string;
-    isPremium: boolean;
-}
+export const UPCOMING_MATCH = {
+    league: "Premier League",
+    status: "LIVE - 74'",
+    homeTeam: "LIVERPOOL",
+    awayTeam: "REAL MADRID",
+    homeScore: "2",
+    awayScore: "0"
+};
 
-export interface TrendingItem {
-    id: string;
-    title: string;
-    time: string;
-    tag: string;
-}
-
-export const TRENDING_NEWS: TrendingItem[] = [
-    { id: '1', title: "Klopp's Legacy: Five years since the Madrid triumph", time: "2h ago", tag: "Editorial" },
-    { id: '2', title: "Transfer Update: Midfield target spotted in Liverpool", time: "5h ago", tag: "Rumors" },
-    { id: '3', title: "Injury News: Key defender returns to full training", time: "8h ago", tag: "Team News" },
-    { id: '4', title: "Tactical Analysis: How slot is evolving the high press", time: "1d ago", tag: "Analysis" },
+export const TRENDING_NEWS = [
+    { tag: "Transfer", title: "Reds confident in securing Zubimendi deal in January window", time: "12m ago" },
+    { tag: "Injury", title: "Salah injury update: Scan results show minor hamstring tweak", time: "45m ago" },
+    { tag: "Analysis", title: "Why Gravenberch is currently the best #6 in world football", time: "2h ago" },
+    { tag: "Stats", title: "Van Dijk wins 98% of aerial duels in November stats bomb", time: "4h ago" }
 ];
 
-export const HERO_ARTICLE: Article = {
-    id: 'hero-1',
-    title: "Anfield Reimagined: The Future of the Historic Stand",
-    excerpt: "Deep dive into the club's long-term vision for the stadium expansion and how it will transform the atmosphere on European nights.",
-    image: "/stadium.png",
-    category: "MUST READ",
-    author: "Oliver Kay",
-    date: "Oct 25, 2025",
-    readTime: "15 min read",
-    isPremium: true
-};
-
-export const LATEST_NEWS: Article[] = [
+export const LATEST_NEWS = [
     {
-        id: 'news-1',
-        title: "Liverpool secured dramatic late winner at Anfield",
-        excerpt: "A look back at the most emotional moments under the lights as Anfield roared the Reds to victory...",
-        image: "https://images.unsplash.com/photo-1543351611-58f69d7c1781?q=80&w=800&auto=format&fit=crop",
-        category: "Match Report",
-        author: "James Pearce",
-        date: "Oct 24, 2025",
-        readTime: "5 min",
-        isPremium: false
+        id: "szoboszlai-long-range",
+        category: "News",
+        image: "https://images.unsplash.com/photo-1543351611-58f69d7c1781?q=80&w=640&auto=format&fit=crop",
+        author: "Matt Addison",
+        date: "Dec 24, 2025",
+        title: "Szoboszlai Century: Midfielder reaches 100 long-range attempts",
+        excerpt: "The Hungarian captain is revolutionizing the outside-the-box shot metric this season..."
     },
     {
-        id: 'news-2',
-        title: "Inside the Scouting: The Next Generation of Reds",
-        excerpt: "Our deep dive into the academy structure and the rising stars pushing for a first-team place this season.",
-        image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop",
-        category: "Feature",
-        author: "Melissa Reddy",
-        date: "Oct 23, 2025",
-        readTime: "10 min",
-        isPremium: true
+        id: "anfield-expansion-v3",
+        category: "Club",
+        image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=640&auto=format&fit=crop",
+        author: "Emma Sanders",
+        date: "Dec 23, 2025",
+        title: "New 80,000 Capacity Vision: FSG weighing up further stadium expansion",
+        excerpt: "With the waiting list for season tickets at an all-time high, new architectural plans are being drafted..."
     },
     {
-        id: 'news-3',
-        title: "Exclusive: Transfer targets for the Winter Window",
-        excerpt: "We break down the three key positions the recruitment team is looking to bolster in January.",
-        image: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?q=80&w=800&auto=format&fit=crop",
-        category: "Transfer News",
-        author: "Fabrizio Romano",
-        date: "Oct 22, 2025",
-        readTime: "7 min",
-        isPremium: true
+        id: "academy-starlets",
+        category: "Academy",
+        image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=640&auto=format&fit=crop",
+        author: "Neil Jones",
+        date: "Dec 22, 2025",
+        title: "The Next Trent? Scouting the U18 right-back currently impressing Slot",
+        excerpt: "A deep dive into the technical specs of the latest Kirkby graduate set for first-team training..."
     }
 ];
