@@ -2,6 +2,7 @@ export const HERO_ARTICLE = {
     id: "liverpool-tactical-masterclass",
     category: "Tactics",
     readTime: "8 min read",
+    date: "Dec 25, 2025",
     title: "The Slot Era: How Liverpool's Midfield Box is Dominating Europe",
     excerpt: "From double pivots to inverted wing-backs, we break down the tactical evolution at Anfield that has the Reds top of the table.",
     author: "James Pearce",
@@ -28,6 +29,7 @@ export const LATEST_NEWS = [
     {
         id: "szoboszlai-long-range",
         category: "News",
+        readTime: "4 min read",
         image: "https://images.unsplash.com/photo-1543351611-58f69d7c1781?q=80&w=640&auto=format&fit=crop",
         author: "Matt Addison",
         date: "Dec 24, 2025",
@@ -37,6 +39,7 @@ export const LATEST_NEWS = [
     {
         id: "anfield-expansion-v3",
         category: "Club",
+        readTime: "6 min read",
         image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=640&auto=format&fit=crop",
         author: "Emma Sanders",
         date: "Dec 23, 2025",
@@ -46,6 +49,7 @@ export const LATEST_NEWS = [
     {
         id: "academy-starlets",
         category: "Academy",
+        readTime: "5 min read",
         image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=640&auto=format&fit=crop",
         author: "Neil Jones",
         date: "Dec 22, 2025",
