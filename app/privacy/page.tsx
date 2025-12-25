@@ -30,7 +30,7 @@ export default function PrivacyPage() {
                 </section>
 
                 <section className="space-y-6 text-zinc-500 text-sm border-t border-white/5 pt-12">
-                    <p>Mr. Anfield is a fan-run publication. We do not sell your personal information to third-party marketing agencies. If you have questions about your privacy on the Kop, reach out at <span className="text-[#c8102e]">privacy@mr-anfield.com</span>.</p>
+                    <p>Mr. Anfield is a fan-run publication. We do not sell your personal information to third-party marketing agencies. If you have questions about your privacy on the Kop, reach out at <span className="text-[#c8102e]">ayush@brandverse.tech</span>.</p>
                 </section>
             </div>
         </div>

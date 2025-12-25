@@ -15,7 +15,7 @@ export default function StructuredData() {
         "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "Customer Service",
-            "email": "contact@mranfield.com"
+            "email": "ayush@brandverse.tech"
         }
     };
 
