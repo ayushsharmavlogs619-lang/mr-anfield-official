@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next';
 import { LATEST_NEWS } from "@/app/lib/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://mr-anfield.netlify.app';
+    const baseUrl = 'https://mranfieldfootball.com';
 
     // Static routes
     const routes = [

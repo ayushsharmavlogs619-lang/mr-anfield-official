@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default function WorkroomPage() {
     const [messages, setMessages] = useState<{ role: 'user' | 'ai', content: string }[]>([
-        { role: 'ai', content: "Welcome to the Anfield Tactical Room, Boss. I'm Mr. Anfield, your chief scout. Which LFC intel are we diving into today?" }
+        { role: 'ai', content: "Welcome to the Anfield Tactical Room, Boss. I'm Mr. Anfield Football, your chief scout. Which LFC intel are we diving into today?" }
     ]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);

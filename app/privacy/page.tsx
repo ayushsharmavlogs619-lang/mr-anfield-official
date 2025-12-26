@@ -9,7 +9,7 @@ export default function PrivacyPage() {
 
                 <section className="space-y-6">
                     <h2 className="text-2xl font-black text-white uppercase tracking-tight border-l-4 border-[#c8102e] pl-4">1. Commitment to Privacy</h2>
-                    <p>Mr. Anfield is dedicated to protecting the privacy of the Liverpool FC fan community. This policy outlines how we handle data collected through our news platform, newsletter, and tactical analysis features.</p>
+                    <p>Mr. Anfield Football is dedicated to protecting the privacy of the Liverpool FC fan community. This policy outlines how we handle data collected through our news platform, newsletter, and tactical analysis features.</p>
                 </section>
 
                 <section className="space-y-6">
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
                 </section>
 
                 <section className="space-y-6 text-zinc-500 text-sm border-t border-white/5 pt-12">
-                    <p>Mr. Anfield is a fan-run publication. We do not sell your personal information to third-party marketing agencies. If you have questions about your privacy on the Kop, reach out at <span className="text-[#c8102e]">ayush@brandverse.tech</span>.</p>
+                    <p>Mr. Anfield Football is a fan-run publication. We do not sell your personal information to third-party marketing agencies. If you have questions about your privacy on the Kop, reach out at <span className="text-[#c8102e]">ayush@brandverse.tech</span>.</p>
                 </section>
             </div>
         </div>

@@ -30,19 +30,31 @@ body {
   .text-shadow-glow {
     text-shadow: 0 0 20px rgba(246, 235, 97, 0.4);
   }
-  
+
   .bg-rev-gradient {
-    background: linear-gradient(to right, var(--rev-gold), var(--rev-orange));
+    background: linear-gradient(to right, #f6eb61, #fa9c2e);
   }
 
-  .bg-red-black-gradient {
-    background: linear-gradient(to bottom, rgba(200, 16, 46, 0.2), transparent);
+  .bg-lfc-gradient {
+    background: linear-gradient(135deg, #c8102e, #800a1d);
+  }
+
+  .bg-lfc-radial {
+    background: radial-gradient(circle at center, rgba(200, 16, 46, 0.4), transparent 85%);
+  }
+
+  .bg-red-glow {
+    box-shadow: 0 0 40px rgba(200, 16, 46, 0.2);
+  }
+
+  .border-lfc-red {
+    border-color: rgba(200, 16, 46, 0.3);
   }
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-  
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -50,8 +62,13 @@ body {
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
@@ -59,13 +76,52 @@ body {
 }
 
 @keyframes pulse-glow {
-  0% { box-shadow: 0 0 0 0 rgba(246, 235, 97, 0.4); }
-  70% { box-shadow: 0 0 0 15px rgba(246, 235, 97, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(246, 235, 97, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(246, 235, 97, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(246, 235, 97, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(246, 235, 97, 0);
+  }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 2s infinite;
 }
 
-@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } } .animate-marquee { animation: marquee 30s linear infinite; } @layer utilities { .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; } }
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.02); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}

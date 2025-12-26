@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { generateLFCArticle } from '@/lib/ghostwriter';
-import { db } from '@/lib/firebase';
+import { ghostwriterAction } from '../actions';
+import { db } from '@/app/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { Wand2, Save, FileText, Loader2 } from 'lucide-react';
 
@@ -18,12 +18,16 @@ export default function GhostwriterPage() {
         setLoading(true);
         setStatus('Summoning the Ghostwriter...');
         try {
-            const result = await generateLFCArticle(prompt);
-            setArticle(result);
-            setStatus('Article drafted!');
+            const result = await ghostwriterAction(prompt);
+            if (result.response) {
+                setArticle(result.response);
+                setStatus('Article drafted!');
+            } else {
+                setStatus('Summoning failed. Check logic.');
+            }
         } catch (error) {
             console.error(error);
-            setStatus('Summoning failed. Check your API key.');
+            setStatus('Summoning failed. Check server logs.');
         }
         setLoading(false);
     };
