@@ -20,12 +20,12 @@ export default function AdminPage() {
         const article = {
             title: formData.get('title'),
             excerpt: formData.get('excerpt'),
-            image: formData.get('image'), // In a real app, this would be a file upload URL
+            image: formData.get('image'),
             category: formData.get('category'),
             author: formData.get('author') || "Mr. Anfield Football Staff",
             readTime: `${Math.floor(Math.random() * 10) + 2} min read`,
             date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-            content: formData.get('content'), // We should probably use a Rich Text Editor later
+            content: formData.get('content'),
             timestamp: serverTimestamp(), // For sorting
             isPremium: formData.get('isPremium') === 'on'
         };
