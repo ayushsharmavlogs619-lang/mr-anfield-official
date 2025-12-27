@@ -1,0 +1,22 @@
+# Publish scripts (server-side utilities with CommonJS)
+publish.js
+publish_*.js
+publish_*.ts
+scripts/
+
+# Build outputs
+.next/
+dist/
+out/
+
+# Dependencies
+node_modules/
+
+# Firebase
+.firebase/
+
+# Vercel
+.vercel/
+
+# Environment
+.env*.local

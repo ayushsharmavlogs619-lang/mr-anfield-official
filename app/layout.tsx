@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "./components/Navbar";
@@ -9,12 +9,13 @@ import Analytics from "./components/Analytics";
 import StructuredData from "./components/StructuredData";
 import NewsletterPopup from "./components/NewsletterPopup";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
   title: "Mr. Anfield Football — LFC News & Tactics",
   description: "The premium destination for Liverpool FC tactical analysis, transfer news, and fan culture.",
-  metadataBase: new URL('https://mranfieldfootball.com'),
+  metadataBase: new URL('https://mr-anfield.vercel.app'),
   keywords: ['Liverpool FC', 'LFC News', 'Football Tactics', 'Premier League', 'Transfer News', 'Match Analysis', 'Anfield', 'Mr. Anfield Football'],
   authors: [{ name: 'Mr. Anfield Football' }],
   creator: 'Mr. Anfield Football',
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://mranfieldfootball.com',
+    url: 'https://mr-anfield.vercel.app',
     title: 'Mr. Anfield Football — LFC News & Tactics',
     description: 'The premium destination for Liverpool FC tactical analysis, transfer news, and fan culture.',
     siteName: 'Mr. Anfield Football',
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-site-verification-code',
+    google: 'ADD_YOUR_GOOGLE_VERIFICATION_CODE_HERE',
   },
 };
 
@@ -75,7 +76,7 @@ export default function RootLayout({
         />
         <StructuredData />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${playfair.variable} ${inter.className} antialiased`}>
         <Analytics />
         <Navbar />
         {children}

@@ -1,41 +1,52 @@
+'use client';
 
-import { Calendar, ChevronRight, Clock, MapPin, Shield, Trophy, Flame, Zap } from "lucide-react";
+import { Calendar, ChevronRight, Clock, MapPin, Shield, Trophy, Flame, Zap, Loader2 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { getUpcomingMatches, getLeagueTable, getLatestResult } from "@/app/lib/api";
 
 export default function MatchCenter() {
-    const matches = [
-        {
-            home: "Liverpool",
-            away: "Man City",
-            date: "Oct 27, 16:30",
-            venue: "Anfield",
-            competition: "Premier League",
-            status: "Upcoming"
-        },
-        {
-            home: "Arsenal",
-            away: "Liverpool",
-            date: "Nov 03, 17:30",
-            venue: "Emirates Stadium",
-            competition: "Premier League",
-            status: "Upcoming"
-        },
-        {
-            home: "Liverpool",
-            away: "B. Leverkusen",
-            date: "Nov 06, 20:00",
-            venue: "Anfield",
-            competition: "Champions League",
-            status: "Upcoming"
-        }
-    ];
+    const [matches, setMatches] = useState<any[]>([]);
+    const [table, setTable] = useState<any[]>([]);
+    const [latestResult, setLatestResult] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
 
-    const table = [
-        { pos: 1, team: "Liverpool", p: 9, pts: 24, form: "WWWDW" },
-        { pos: 2, team: "Man City", p: 9, pts: 23, form: "WDWWW" },
-        { pos: 3, team: "Arsenal", p: 9, pts: 20, form: "DWLWW" },
-        { pos: 4, team: "Aston Villa", p: 9, pts: 18, form: "WWLDW" },
-    ];
+    useEffect(() => {
+        async function loadMatchData() {
+            try {
+                const [m, t, r] = await Promise.all([
+                    getUpcomingMatches(5),
+                    getLeagueTable(),
+                    getLatestResult()
+                ]);
+                setMatches(m);
+                setTable(t);
+                setLatestResult(r);
+            } catch (error) {
+                console.error("Match Center Error:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        loadMatchData();
+    }, []);
+
+    const formatDate = (date: any) => {
+        if (!date) return "TBD";
+        if (typeof date === 'string') return date;
+        if (date.toDate) return date.toDate().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-6">
+                <Loader2 className="w-16 h-16 text-[#c8102e] animate-spin" />
+                <h2 className="text-xl font-black uppercase tracking-[0.4em] text-white italic">Synchronizing with Anfield...</h2>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-[#050505] text-zinc-100 pb-20 relative overflow-hidden">
@@ -77,18 +88,20 @@ export default function MatchCenter() {
                                 Upcoming Fixtures
                             </h3>
                             <div className="space-y-4 md:space-y-6 relative z-10">
-                                {matches.map((match, i) => (
+                                {matches.length > 0 ? matches.map((match, i) => (
                                     <div key={i} className="group p-6 md:p-8 rounded-[2.5rem] bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-[#c8102e] transition-all flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 shadow-xl">
                                         <div className="flex items-center gap-6 text-sm font-black text-zinc-500 w-full md:w-40 justify-center md:justify-start">
                                             <div className="flex flex-col items-center md:items-start gap-1">
                                                 <span className="text-[#c8102e] uppercase tracking-[0.2em] text-[10px] bg-[#c8102e]/10 px-3 py-1 rounded-lg border border-[#c8102e]/20">{match.competition}</span>
-                                                <span className="text-white text-base md:text-lg tracking-tighter">{match.date}</span>
+                                                <span className="text-white text-base md:text-lg tracking-tighter">{formatDate(match.date)}</span>
                                             </div>
                                         </div>
-                                        <div className="flex-1 flex items-center justify-center gap-6 md:gap-10 text-xl md:text-4xl font-black uppercase tracking-tighter w-full">
+                                        <div className="flex-1 flex items-center justify-center gap-6 md:gap-10 text-xl md:text-3xl font-black uppercase tracking-tighter w-full">
                                             <div className="text-right w-1/3 text-white group-hover:text-[#c8102e] transition-colors">{match.home}</div>
                                             <div className="flex flex-col items-center gap-2">
-                                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#c8102e] flex items-center justify-center text-[10px] md:text-xs font-black text-white shadow-lg shadow-[#c8102e]/40">VS</div>
+                                                <Image src={`/logos/${match.home.toLowerCase().replace(/ /g, '-')}.png`} alt="" width={32} height={32} className="opacity-50 group-hover:opacity-100 transition-opacity" onError={(e: any) => (e.currentTarget.style.display = 'none')} />
+                                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#c8102e] flex items-center justify-center text-[10px] font-black text-white shadow-lg shadow-[#c8102e]/40 shrink-0">VS</div>
+                                                <Image src={`/logos/${match.away.toLowerCase().replace(/ /g, '-')}.png`} alt="" width={32} height={32} className="opacity-50 group-hover:opacity-100 transition-opacity" onError={(e: any) => (e.currentTarget.style.display = 'none')} />
                                             </div>
                                             <div className="text-left w-1/3 text-white group-hover:text-[#c8102e] transition-colors">{match.away}</div>
                                         </div>
@@ -98,7 +111,9 @@ export default function MatchCenter() {
                                             </button>
                                         </div>
                                     </div>
-                                ))}
+                                )) : (
+                                    <div className="text-center py-20 text-zinc-600 font-black uppercase tracking-widest italic">No upcoming fixtures scheduled.</div>
+                                )}
                             </div>
                         </div>
 
@@ -113,25 +128,29 @@ export default function MatchCenter() {
                                 </div>
                                 Latest Result
                             </h3>
-                            <div className="flex flex-col items-center relative z-10">
-                                <div className="text-[#c8102e] text-[9px] md:text-xs font-black uppercase tracking-[0.4em] mb-6 md:mb-8 bg-[#c8102e]/10 px-6 py-2 rounded-full border border-[#c8102e]/20">Full Time • Premier League</div>
-                                <div className="flex items-center gap-6 md:gap-20 mb-10 md:mb-12">
-                                    <div className="flex flex-col items-center gap-4 md:gap-6">
-                                        <div className="w-20 h-20 md:w-32 md:h-32 rounded-[1.5rem] md:rounded-[2rem] bg-white text-[#c8102e] border-4 border-[#c8102e] flex items-center justify-center text-3xl md:text-5xl font-black shadow-[0_20px_40px_rgba(200,16,46,0.3)] italic">LIV</div>
-                                        <span className="text-4xl md:text-7xl font-black italic">3</span>
+                            {latestResult ? (
+                                <div className="flex flex-col items-center relative z-10">
+                                    <div className="text-[#c8102e] text-[9px] md:text-xs font-black uppercase tracking-[0.4em] mb-6 md:mb-8 bg-[#c8102e]/10 px-6 py-2 rounded-full border border-[#c8102e]/20">Finished • {latestResult.competition || "Premier League"}</div>
+                                    <div className="flex items-center gap-6 md:gap-20 mb-10 md:mb-12">
+                                        <div className="flex flex-col items-center gap-4 md:gap-6 w-32">
+                                            <div className="w-20 h-20 md:w-32 md:h-32 rounded-[1.5rem] md:rounded-[2rem] bg-white text-[#c8102e] border-4 border-[#c8102e] flex items-center justify-center text-3xl md:text-5xl font-black shadow-[0_20px_40px_rgba(200,16,46,0.3)] italic uppercase">{latestResult.home?.substring(0, 3)}</div>
+                                            <span className="text-4xl md:text-7xl font-black italic">{latestResult.homeScore}</span>
+                                        </div>
+                                        <div className="text-[#c8102e] text-3xl md:text-4xl font-black animate-pulse">-</div>
+                                        <div className="flex flex-col items-center gap-4 md:gap-6 w-32">
+                                            <span className="text-4xl md:text-7xl font-black text-white italic">{latestResult.awayScore}</span>
+                                            <div className="w-20 h-20 md:w-32 md:h-32 rounded-[1.5rem] md:rounded-[2rem] bg-zinc-900 border border-white/10 flex items-center justify-center text-3xl md:text-5xl font-black text-zinc-500 italic uppercase">{latestResult.away?.substring(0, 3)}</div>
+                                        </div>
                                     </div>
-                                    <div className="text-[#c8102e] text-3xl md:text-4xl font-black animate-pulse">-</div>
-                                    <div className="flex flex-col items-center gap-4 md:gap-6">
-                                        <span className="text-4xl md:text-7xl font-black text-zinc-600 italic">1</span>
-                                        <div className="w-20 h-20 md:w-32 md:h-32 rounded-[1.5rem] md:rounded-[2rem] bg-zinc-900 border border-white/10 flex items-center justify-center text-3xl md:text-5xl font-black text-zinc-500 italic">CHE</div>
+                                    <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-[10px] md:text-sm font-black text-zinc-400 uppercase tracking-widest bg-black/40 px-6 md:px-10 py-4 md:py-5 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                                        {latestResult.scorers?.map((s: string, idx: number) => (
+                                            <div key={idx} className="flex items-center gap-2 font-bold"><Flame className="w-3 h-3 md:w-4 md:h-4 text-[#c8102e] fill-current" /> {s}</div>
+                                        ))}
                                     </div>
                                 </div>
-                                <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-[10px] md:text-sm font-black text-zinc-400 uppercase tracking-widest bg-black/40 px-6 md:px-10 py-4 md:py-5 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                                    <div className="flex items-center gap-2 font-bold"><Flame className="w-3 h-3 md:w-4 md:h-4 text-[#c8102e] fill-current" /> Salah 29' (P)</div>
-                                    <div className="flex items-center gap-2 font-bold"><Flame className="w-3 h-3 md:w-4 md:h-4 text-[#c8102e] fill-current" /> Jones 51'</div>
-                                    <div className="flex items-center gap-2 font-bold"><Flame className="w-3 h-3 md:w-4 md:h-4 text-[#c8102e] fill-current" /> Gakpo 82'</div>
-                                </div>
-                            </div>
+                            ) : (
+                                <div className="text-center py-20 text-zinc-600 font-black uppercase tracking-widest italic">Result synchronization pending...</div>
+                            )}
                         </div>
                     </div>
 

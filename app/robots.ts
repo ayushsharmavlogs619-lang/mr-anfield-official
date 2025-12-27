@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/admin', '/private'], // Protect future admin routes
         },
-        sitemap: 'https://mranfieldfootball.com/sitemap.xml',
+        sitemap: 'https://mr-anfield.vercel.app/sitemap.xml',
     };
 }

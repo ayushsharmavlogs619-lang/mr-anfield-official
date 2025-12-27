@@ -6,8 +6,8 @@ export default function StructuredData() {
         "@type": "Organization",
         "name": "Mr. Anfield Football",
         "description": "Premium Liverpool FC news, tactical analysis, transfer updates, and fan culture destination.",
-        "url": "https://mranfieldfootball.com",
-        "logo": "https://mranfieldfootball.com/logo.png",
+        "url": "https://mr-anfield.vercel.app",
+        "logo": "https://mr-anfield.vercel.app/logo.png",
         "sameAs": [
             "https://x.com/AyushKrishnaa",
             "https://www.instagram.com/mr.anfieldfootball",
@@ -26,7 +26,7 @@ export default function StructuredData() {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Mr. Anfield Football",
-        "url": "https://mranfieldfootball.com",
+        "url": "https://mr-anfield.vercel.app",
         "description": "The premium destination for Liverpool FC tactical analysis, transfer news, and fan culture.",
         "publisher": {
             "@type": "Organization",
@@ -34,7 +34,7 @@ export default function StructuredData() {
         },
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://mranfieldfootball.com/search?q={search_term_string}",
+            "target": "https://mr-anfield.vercel.app/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     };

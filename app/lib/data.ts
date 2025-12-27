@@ -20,10 +20,10 @@ export const UPCOMING_MATCH = {
 };
 
 export const TRENDING_NEWS = [
-    { tag: "Transfer", title: "Reds confident in securing Zubimendi deal in January window", time: "12m ago" },
-    { tag: "Injury", title: "Salah injury update: Scan results show minor hamstring tweak", time: "45m ago" },
-    { tag: "Analysis", title: "Why Gravenberch is currently the best #6 in world football", time: "2h ago" },
-    { tag: "Stats", title: "Van Dijk wins 98% of aerial duels in November stats bomb", time: "4h ago" }
+    { id: "transfer-zubimendi", tag: "Transfer", title: "Reds confident in securing Zubimendi deal in January window", time: "12m ago", slug: "transfer-zubimendi" },
+    { id: "salah-injury-update", tag: "Injury", title: "Salah injury update: Scan results show minor hamstring tweak", time: "45m ago", slug: "salah-injury-update" },
+    { id: "gravenberch-best-6", tag: "Analysis", title: "Why Gravenberch is currently the best #6 in world football", time: "2h ago", slug: "gravenberch-best-6" },
+    { id: "van-dijk-stats", tag: "Stats", title: "Van Dijk wins 98% of aerial duels in November stats bomb", time: "4h ago", slug: "van-dijk-stats" }
 ];
 
 export const LATEST_NEWS = [
@@ -121,7 +121,7 @@ export const GENERAL_FOOTBALL = [
         id: "champions-league-new-format",
         category: "UEFA",
         readTime: "6 min read",
-        image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=640&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=640&auto=format&fit=crop",
         author: "Mr. Anfield Football Editorial",
         date: "Dec 24, 2025",
         title: "The Swiss Model: Why the New Champions League Format Favors the English Elite",

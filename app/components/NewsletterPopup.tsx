@@ -24,6 +24,14 @@ export default function NewsletterPopup() {
         }
     }, []);
 
+    useEffect(() => {
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') closePopup();
+        };
+        window.addEventListener('keydown', handleEsc);
+        return () => window.removeEventListener('keydown', handleEsc);
+    }, []);
+
     const closePopup = () => {
         setIsOpen(false);
         localStorage.setItem('hasSeenNewsletter', 'true');
@@ -56,17 +64,22 @@ export default function NewsletterPopup() {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl animate-in fade-in duration-500">
-            <div className="relative w-full max-w-lg bg-[#0a0a0a] border border-[#c8102e]/40 rounded-[3rem] overflow-hidden shadow-[0_40px_100px_rgba(200,16,46,0.3)] animate-in zoom-in duration-500">
+        <div
+            onClick={(e) => {
+                if (e.target === e.currentTarget) closePopup();
+            }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl animate-in fade-in duration-500 cursor-pointer"
+        >
+            <div className="relative w-full max-w-lg bg-[#0a0a0a] border border-[#c8102e]/60 rounded-[3rem] overflow-hidden shadow-[0_0_100px_rgba(200,16,46,0.4)] animate-in zoom-in duration-500 cursor-default">
                 {/* Background Glows - RED EVERYWHERE */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] bg-red-900/40 blur-[100px] pointer-events-none" />
-                <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#c8102e]/20 blur-[80px] pointer-events-none" />
+                <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#c8102e]/30 blur-[80px] pointer-events-none" />
 
-                {/* Close Button */}
+                {/* Close Button - More Visible */}
                 <button
                     onClick={closePopup}
                     aria-label="Close newsletter popup"
-                    className="absolute top-8 right-8 text-white/40 hover:text-white transition-all bg-white/5 hover:bg-white/10 p-3 rounded-2xl border border-white/5 group z-50"
+                    className="absolute top-6 right-6 text-white hover:text-[#c8102e] transition-all bg-white/10 hover:bg-white/20 p-3 rounded-2xl border border-white/20 group z-50 shadow-lg"
                 >
                     <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
                 </button>
