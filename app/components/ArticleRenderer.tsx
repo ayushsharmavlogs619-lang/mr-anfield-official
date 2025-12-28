@@ -44,6 +44,24 @@ export default function ArticleRenderer({ content }: ArticleRendererProps) {
                 );
             }
 
+            // Header 4
+            if (trimmedBlock.startsWith('#### ')) {
+                return (
+                    <h4 key={i} className="text-xl md:text-2xl font-black text-white font-sans mt-12 mb-6 border-l-[4px] border-[#c8102e]/60 pl-6 italic uppercase tracking-tighter">
+                        {trimmedBlock.replace('#### ', '')}
+                    </h4>
+                );
+            }
+
+            // Header 5
+            if (trimmedBlock.startsWith('##### ')) {
+                return (
+                    <h5 key={i} className="text-lg md:text-xl font-black text-[#c8102e] font-sans mt-10 mb-4 uppercase tracking-tighter">
+                        {trimmedBlock.replace('##### ', '')}
+                    </h5>
+                );
+            }
+
             // Header 2
             if (trimmedBlock.startsWith('## ')) {
                 return (

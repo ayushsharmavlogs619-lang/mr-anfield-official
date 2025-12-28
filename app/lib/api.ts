@@ -109,7 +109,7 @@ export async function getArticleById(id: string): Promise<Article | null> {
 export async function getTrendingNews(count: number = 4): Promise<Article[]> {
     try {
         const newsRef = collection(db, "news");
-        const q = query(newsRef, where("type", "==", "Trending"), limit(count));
+        const q = query(newsRef, where("type", "==", "Trending"), orderBy("timestamp", "desc"), limit(count));
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) return getLatestNews(count);
@@ -127,7 +127,7 @@ export async function getTrendingNews(count: number = 4): Promise<Article[]> {
 export async function getExclusiveNews(count: number = 4): Promise<Article[]> {
     try {
         const newsRef = collection(db, "news");
-        const q = query(newsRef, where("type", "==", "Exclusive"), limit(count));
+        const q = query(newsRef, where("type", "==", "Exclusive"), orderBy("timestamp", "desc"), limit(count));
         const querySnapshot = await getDocs(q);
 
         return querySnapshot.docs.map(doc => ({

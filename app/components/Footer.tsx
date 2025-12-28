@@ -127,7 +127,7 @@ export default function Footer() {
                             <div className="p-3 bg-[#c8102e]/10 rounded-2xl border border-[#c8102e]/20 group-hover:bg-[#c8102e] transition-colors">
                                 <Zap className="w-6 h-6 text-[#f6eb61] group-hover:text-white fill-current" />
                             </div>
-                            Tactical Room
+                            Tactical Analysis
                         </h4>
                         <ul className="space-y-6">
                             {[

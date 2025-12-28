@@ -32,9 +32,6 @@ export default function Navbar() {
                         <div className="hidden lg:flex gap-10 text-xs font-black uppercase tracking-[0.2em] text-zinc-500 items-center">
                             <Link href="/" className="hover:text-[#c8102e] transition-colors text-zinc-100">News</Link>
                             <Link href="/match-center" className="hover:text-[#c8102e] transition-colors">Match Center</Link>
-                            <Link href="/workroom" className="px-4 py-2 bg-gradient-to-tr from-[#c8102e] to-[#800a1d] text-white rounded-xl shadow-lg shadow-[#c8102e]/20 flex items-center gap-2">
-                                <Zap className="w-3 h-3 fill-current" /> Tactical Room
-                            </Link>
                         </div>
                     </div>
 

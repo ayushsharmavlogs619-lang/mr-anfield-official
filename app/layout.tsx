@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Analytics from "./components/Analytics";
 import StructuredData from "./components/StructuredData";
 import NewsletterPopup from "./components/NewsletterPopup";
+import CookieConsent from "./components/CookieConsent";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
@@ -68,17 +69,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Cookiebot CMP - MUST LOAD FIRST for GDPR compliance */}
-        <Script
-          id="cookiebot"
-          src="https://consent.cookiebot.com/uc.js"
-          data-cbid={process.env.NEXT_PUBLIC_COOKIEBOT_ID}
-          data-blockingmode="auto"
-          strategy="beforeInteractive"
-        />
+        <link rel="manifest" href="/manifest.json" />
         <StructuredData />
       </head>
       <body className={`${inter.variable} ${playfair.variable} ${inter.className} antialiased`}>
         <Analytics />
+        <CookieConsent />
         <Navbar />
         {children}
         <Footer />

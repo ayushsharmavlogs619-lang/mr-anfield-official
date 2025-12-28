@@ -26,6 +26,10 @@ import { useState, useEffect } from 'react';
 import { HERO_ARTICLE, UPCOMING_MATCH, LATEST_NEWS, TRENDING_NEWS, GENERAL_FOOTBALL } from "@/app/lib/data";
 import { getLatestNews, getHeroArticle, getExclusiveNews, getUpcomingMatches, getLeagueTable, Article } from "@/app/lib/api";
 
+const ScreenReaderOnly = ({ children }: { children: React.ReactNode }) => (
+  <h1 className="sr-only">{children}</h1>
+);
+
 export default function Home() {
   const [newsGrid, setNewsGrid] = useState<Article[]>([]);
   const [tickerNews, setTickerNews] = useState<{ tag: string; title: string }[]>(TRENDING_NEWS.map(art => ({ tag: art.tag.toUpperCase(), title: art.title })));
@@ -104,6 +108,7 @@ export default function Home() {
       </div>
 
       <main className="max-w-7xl mx-auto px-4 md:px-8 pt-10 space-y-24 relative">
+        <ScreenReaderOnly>Mr. Anfield Football - Premium Liverpool FC News & Tactical Analysis</ScreenReaderOnly>
         {/* Background Atmospheric Glows - RED EVERYWHERE */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] md:w-[120%] h-[1000px] bg-red-900/40 blur-[150px] rounded-full pointer-events-none -z-10" />
         <div className="absolute top-[800px] -left-[20%] w-[80%] h-[800px] bg-red-900/30 blur-[180px] rounded-full pointer-events-none -z-10" />
@@ -122,9 +127,9 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <h1 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter leading-[0.85] italic text-white">
+            <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter leading-[0.85] italic text-white">
               BREAKING FROM<br /><span className="text-[#c8102e] drop-shadow-[0_0_30px_rgba(200,16,46,0.6)] font-black">ANFIELD</span>
-            </h1>
+            </h2>
             <p className="text-zinc-400 font-bold text-base md:text-2xl max-w-lg mx-auto italic px-4">
               The hottest Liverpool FC news that&apos;s got everyone talking... 🚀
             </p>
@@ -206,7 +211,7 @@ export default function Home() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 text-xs font-black text-zinc-500 uppercase tracking-widest">
                       <User className="w-3 h-3 text-[#c8102e]" />
-                      {item.author || "Editorial Board"}
+                      {item.author || "Mr. Anfield"}
                     </div>
                     <div className="text-[10px] text-zinc-600 font-bold uppercase tracking-tighter">
                       {formatDate(item.timestamp || item.date)}

@@ -68,8 +68,7 @@ firebase deploy --only firestore
 
 ### 2. Publish Flagship Content (30 min)
 
-Use AI Ghostwriter at `/workroom` to generate from outlines:
-
+Create new articles via the Admin panel or direct Firestore entry using these outlines:
 - "The Inverted Wingback Revolution"
 - "Why Firmino Was Most Underrated"
 - "Tactical Blueprint to Beat Man City"
@@ -206,7 +205,7 @@ Total: 41,200 words of production-ready strategy + content
 
 Firebase permissions MUST be deployed before:
 
-- Publishing articles via Ghostwriter
+- Publishing articles
 - Saving newsletter signups
 - Loading Match Center data
 
