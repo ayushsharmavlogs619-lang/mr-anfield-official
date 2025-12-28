@@ -2,7 +2,8 @@
 
 ## Critical Manual Steps Required
 
-### 1. **Deploy Firestore Security Rules**
+### 1. Deploy Firestore Security Rules
+
 The `firestore.rules` file has been created. You MUST deploy it to Firebase:
 
 ```bash
@@ -10,6 +11,7 @@ firebase deploy --only firestore:rules
 ```
 
 **What this fixes:**
+
 - ✅ Match Center data loads (no more permission denied)
 - ✅ League Table displays correctly
 - ✅ Newsletter subscriptions work
@@ -17,10 +19,12 @@ firebase deploy --only firestore:rules
 
 ---
 
-### 2. **Create Missing Firestore Composite Index**
+### 2. Create Missing Firestore Composite Index
+
 The Hero Article query requires a composite index:
 
 **Manual Steps:**
+
 1. Open [Firebase Console](https://console.firebase.google.com/)
 2. Go to **Mr. Anfield** project
 3. Navigate to **Firestore Database** → **Indexes**
@@ -34,17 +38,20 @@ The Hero Article query requires a composite index:
 7. Wait 2-5 minutes for indexing to complete
 
 **Alternative (from browser console logs):**
+
 - When you visit the homepage, check browser console
 - Look for a link that says "Create index here"
 - Click it and it will auto-configure
 
 **What this fixes:**
+
 - ✅ Hero article loads instantly
 - ✅ No more "Missing index" errors in console
 
 ---
 
-### 3. **Configure Environment Variables**
+### 3. Configure Environment Variables
+
 Update `.env.local` with actual values:
 
 ```env
@@ -58,6 +65,7 @@ NEXT_PUBLIC_COOKIEBOT_ID="your-actual-cookiebot-id"
 ```
 
 **How to get these values:**
+
 1. **Meta Pixel ID**: [Facebook Events Manager](https://business.facebook.com/events_manager2)
 2. **Cookiebot ID**: [Cookiebot Dashboard](https://www.cookiebot.com/)
 3. **Google Verification**: [Search Console](https://search.google.com/search-console)
@@ -67,11 +75,13 @@ NEXT_PUBLIC_COOKIEBOT_ID="your-actual-cookiebot-id"
 ## Current Firebase Configuration Status
 
 ### ✅ Already Configured
+
 - Firebase SDK initialized (`app/lib/firebase.ts`)
 - Firestore database connection working
 - Storage and Auth services available
 
 ### ⚠️ Pending Deployment
+
 - **Firestore Rules**: Created but not deployed
 - **Composite Index**: Needs manual creation
 
@@ -80,6 +90,7 @@ NEXT_PUBLIC_COOKIEBOT_ID="your-actual-cookiebot-id"
 ## Testing After Deployment
 
 1. Deploy the rules:
+
    ```bash
    firebase deploy --only firestore:rules
    ```
@@ -87,6 +98,7 @@ NEXT_PUBLIC_COOKIEBOT_ID="your-actual-cookiebot-id"
 2. Create the composite index (see instructions above)
 
 3. Test the site:
+
    ```bash
    npm run dev
    ```
@@ -101,17 +113,20 @@ NEXT_PUBLIC_COOKIEBOT_ID="your-actual-cookiebot-id"
 
 ## Troubleshooting
 
-### If Match Center still shows "Permission Denied":
+### If Match Center still shows "Permission Denied"
+
 - Verify rules deployed: `firebase firestore:indexes`
 - Check Firebase Console → Firestore → Rules tab
 - Rules should match `firestore.rules` file
 
-### If Hero Article doesn't load:
+### If Hero Article doesn't load
+
 - Check browser console for index creation link
 - Verify index exists in Firebase Console → Indexes
 - Index status should show "Enabled" (not "Building")
 
-### If Newsletter popup doesn't save:
+### If Newsletter popup doesn't save
+
 - Check network tab for 403 errors
 - Verify `newsletter_subscribers` collection allows `create: if true`
 
@@ -120,6 +135,7 @@ NEXT_PUBLIC_COOKIEBOT_ID="your-actual-cookiebot-id"
 ## Quick Reference
 
 **Firebase CLI Commands:**
+
 ```bash
 # Install Firebase CLI (if not installed)
 npm install -g firebase-tools
@@ -142,5 +158,5 @@ firebase firestore:indexes
 
 ---
 
-**Need Help?** 
+**Need Help?**
 Check the [Firebase Documentation](https://firebase.google.com/docs/firestore/security/get-started) for more details on security rules.

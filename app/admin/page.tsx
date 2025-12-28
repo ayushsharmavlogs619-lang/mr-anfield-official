@@ -65,8 +65,8 @@ export default function AdminPage() {
 
                     <div className="grid grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 mb-2">Category</label>
-                            <select name="category" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#c8102e] outline-none transition-colors">
+                            <label htmlFor="category" className="block text-xs font-black uppercase tracking-widest text-zinc-500 mb-2">Category</label>
+                            <select id="category" name="category" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#c8102e] outline-none transition-colors">
                                 <option>Transfer News</option>
                                 <option>Match Report</option>
                                 <option>Tactical Analysis</option>
@@ -75,8 +75,8 @@ export default function AdminPage() {
                             </select>
                         </div>
                         <div>
-                            <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 mb-2">Author</label>
-                            <input name="author" type="text" defaultValue="Ayush Sharma" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#c8102e] outline-none transition-colors" />
+                            <label htmlFor="author" className="block text-xs font-black uppercase tracking-widest text-zinc-500 mb-2">Author</label>
+                            <input id="author" name="author" type="text" defaultValue="Ayush Sharma" placeholder="Enter author name" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#c8102e] outline-none transition-colors" />
                         </div>
                     </div>
 

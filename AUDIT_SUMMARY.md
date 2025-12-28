@@ -23,7 +23,7 @@ The comprehensive site audit has been completed with **all code-level issues res
 
 ## ✅ COMPLETED FIXES
 
-### 1. **Domain Configuration** (100% Complete)
+### 1. Domain Configuration (100% Complete)
 
 **Issue**: Placeholder domain `mranfieldfootball.com` used throughout the site.
 
@@ -38,7 +38,7 @@ The comprehensive site audit has been completed with **all code-level issues res
 
 ---
 
-### 2. **TypeScript Type Safety** (Major Improvement)
+### 2. TypeScript Type Safety (Major Improvement)
 
 **Issue**: Heavy use of `any` types compromising code reliability.
 
@@ -49,7 +49,7 @@ The comprehensive site audit has been completed with **all code-level issues res
 - ✅ `app/lib/api.ts` - API layer interfaces
 - ✅ `app/workroom/ghostwriter/page.tsx` - AI content generation
 
-**Changes**:
+**Detailed Changes**:
 
 - Replaced `any` with proper `Article`, `Match` interfaces
 - Added proper `timestamp` typing: `{ seconds: number; nanoseconds: number } | Date | string`
@@ -58,23 +58,23 @@ The comprehensive site audit has been completed with **all code-level issues res
 
 ---
 
-### 3. **UX/UI Enhancements** (100% Complete)
+### 3. UX/UI Enhancements (100% Complete)
 
 **Issue**: Intrusive newsletter popup blocking content.
 
-**Improvements**:
+**Major Improvements**:
 
 - ✅ **Escape key** now closes popup
-- ✅ **Click outside** (overlay) dismisses popup  
+- ✅ **Click outside** (overlay) dismisses popup
 - ✅ **Close button** more visible (white text, larger, better contrast)
 - ✅ **Better backdrop** (95% opacity, stronger blur)
 - ✅ Maintained 45-second delay and localStorage persistence
 
-**File**: `app/components/NewsletterPopup.tsx`
+**Primary File**: `app/components/NewsletterPopup.tsx`
 
 ---
 
-### 4. **Image Optimization** (100% Complete)
+### 4. Image Optimization (100% Complete)
 
 **Issue**: Missing `sizes` props causing performance warnings and layout shift.
 
@@ -84,30 +84,30 @@ The comprehensive site audit has been completed with **all code-level issues res
 - ✅ `app/news/[id]/page.tsx` - Article header, related news
 - ✅ `app/workroom/ghostwriter/page.tsx` - Preview images
 
-**Added**:
+**Implementation Example**:
 
 ```tsx
 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
 ```
 
-**Impact**: Better responsive images, reduced bandwidth, faster LCP (Largest Contentful Paint).
+**Overall Impact**: Better responsive images, reduced bandwidth, faster LCP (Largest Contentful Paint).
 
 ---
 
-### 5. **Content Rendering** (Enhanced)
+### 5. Content Rendering (Enhanced)
 
 **Issue**: Limited Markdown support, no image embedding.
 
-**File**: `app/components/ArticleRenderer.tsx`
+**Core File**: `app/components/ArticleRenderer.tsx`
 
-**Added Features**:
+**New Rendering Features**:
 
 - ✅ `{{IMAGE:filename.png}}` support for rivalry articles
 - ✅ Improved heading hierarchy (H2, H3)
 - ✅ Better quote styling with shadows
 - ✅ Fallback font updated to `var(--font-inter)`
 
-**Example Usage** (already working in `app/lib/rivalry_content.ts`):
+**Example Usage Breakdown**:
 
 ```markdown
 ### Tactical Breakdown: The High Press
@@ -117,28 +117,28 @@ sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
 
 ---
 
-### 6. **Data Quality** (100% Complete)
+### 6. Data Quality (100% Complete)
 
 **Issue**: Broken Unsplash image URL returning 404.
 
 **File**: `app/lib/data.ts`
 
-**Fixed**:
+**Fixed Elements**:
 
 - ✅ Replaced broken `photo-1508098682722` with `photo-1517466787929`
 - ✅ Verified all other image URLs load correctly
 
 ---
 
-### 7. **Code Quality** (Ongoing)
+### 7. Code Quality Consistency (Ongoing)
 
-**Removed**:
+**Cleanup Actions**:
 
 - ✅ Unused `matchData` variable in `app/page.tsx`
 - ✅ Moved `statusMessages` constant outside component (better performance)
 - ✅ Added error logging to catch blocks (better debugging)
 
-**Unescaped Entities Fixed**:
+**Unescaped Entities Corrections**:
 
 - ✅ `What's` → `What&apos;s` (Ghostwriter label)
 - ✅ `that's` → `that&apos;s` (Homepage tagline)
@@ -148,33 +148,33 @@ sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
 
 ## ⚠️ MANUAL STEPS REQUIRED
 
-### 🔥 **CRITICAL 1: Deploy Firebase Security Rules**
+### 🔥 CRITICAL 1: Deploy Firebase Security Rules
 
 **Status**: Rules file created ✅ | Deployment pending ❌
 
-**Action Required**:
+**Action Required Terminal Command**:
 
 ```bash
 firebase deploy --only firestore:rules
 ```
 
-**File Created**: `firestore.rules`
+**Target File**: `firestore.rules`
 
-**What This Fixes**:
+**Functional IMPACT**:
 
 - Match Center data loads (currently shows "Permission denied")
 - League Table displays standings
 - Newsletter subscriptions save properly
 
-**Estimated Time**: 2 minutes
+**Estimated Effort**: 2 minutes
 
 ---
 
-### 🔥 **CRITICAL 2: Create Firestore Composite Index**
+### 🔥 CRITICAL 2: Create Firestore Composite Index
 
 **Status**: Pending ❌
 
-**Action Required**:
+**Manual Configuration Steps**:
 
 1. Visit [Firebase Console](https://console.firebase.google.com/) → Mr. Anfield project
 2. Go to **Firestore Database** → **Indexes** tab
@@ -185,17 +185,17 @@ firebase deploy --only firestore:rules
    - Field 2: `timestamp` (Descending)
 5. Wait 2-5 minutes for index build
 
-**Alternative**: Check browser console on homepage, click the "Create index" link that appears in the error.
+**Alternative Quick Fix**: Check browser console on homepage, click the "Create index" link that appears in the error.
 
-**What This Fixes**:
+**Functional IMPACT**:
 
 - Hero article loads instantly (currently fails with "Missing index" error)
 
-**Estimated Time**: 5 minutes (+ 2-5 min build time)
+**Estimated Effort**: 5 minutes (+ 2-5 min build time)
 
 ---
 
-### 🔧 **IMPORTANT: Update Environment Variables**
+### 🔧 IMPORTANT: Update Environment Variables
 
 **Status**: Placeholders in use ⚠️
 
@@ -211,19 +211,19 @@ NEXT_PUBLIC_COOKIEBOT_ID="YOUR_ACTUAL_ID"         # Currently: placeholder
 verification: { google: "YOUR_VERIFICATION_CODE" }  # Currently: "your-google-site-verification-code"
 ```
 
-**How to Get**:
+**Where to Fetch Values**:
 
 - **Meta Pixel**: [Facebook Events Manager](https://business.facebook.com/events_manager2)
 - **Cookiebot**: [Cookiebot Dashboard](https://www.cookiebot.com/)
 - **Google**: [Search Console](https://search.google.com/search-console)
 
-**What This Fixes**:
+**Functional IMPACT**:
 
 - Facebook ad tracking
 - GDPR cookie compliance
 - Google Search Console verification
 
-**Estimated Time**: 15 minutes
+**Estimated Effort**: 15 minutes
 
 ---
 
@@ -231,21 +231,21 @@ verification: { google: "YOUR_VERIFICATION_CODE" }  # Currently: "your-google-si
 
 ### Publish Scripts (8 errors)
 
-**Location**: `publish.js`, `publish_counter.js`, `publish_rivalry.js`, `publish_blitz.ts`, `scripts/publish_*.js`
+**Script Locations**: `publish.js`, `publish_counter.js`, `publish_rivalry.js`, `publish_blitz.ts`, `scripts/publish_*.js`
 
-**Issue**: CommonJS `require()` style imports
+**Root Issue**: CommonJS `require()` style imports.
 
-**Why Not Fixed**: These are server-side utility scripts, not part of the Next.js app. They work perfectly fine.
+**Reasoning for Skip**: These are server-side utility scripts, not part of the Next.js app. They work perfectly fine as is.
 
-**If You Want to Fix**: Add to `.eslintignore`:
+**Solution to Silence Warnings**: Add to `.eslintignore`:
 
-```
+```text
 publish*.js
 publish*.ts
 scripts/
 ```
 
-**Estimated Time**: 1 minute
+**Estimated Effort**: 1 minute
 
 ---
 
@@ -253,7 +253,7 @@ scripts/
 
 After completing the manual steps, verify:
 
-### Homepage (`/`)
+### Homepage (`/`) Functionality
 
 - [ ] Hero article loads without errors
 - [ ] "Breaking from Anfield" section displays
@@ -261,14 +261,14 @@ After completing the manual steps, verify:
 - [ ] League Table displays top 5 teams
 - [ ] No console errors about permissions or indexes
 
-### Article Pages (`/news/[id]`)
+### Article Pages (`/news/[id]`) Functionality
 
 - [ ] Article content renders properly
 - [ ] Images load with correct sizes
 - [ ] Related articles section populates
 - [ ] Social share buttons present
 
-### Newsletter Popup
+### Newsletter Popup UX
 
 - [ ] Appears after 45 seconds
 - [ ] Escape key closes it
@@ -276,7 +276,7 @@ After completing the manual steps, verify:
 - [ ] Close button (X) is clearly visible
 - [ ] Saves email to Firestore without errors
 
-### Browser Console
+### Browser Console Health
 
 - [ ] No "Permission denied" errors
 - [ ] No "Missing index" errors
@@ -287,7 +287,7 @@ After completing the manual steps, verify:
 
 ## 📊 Performance Metrics (Expected After Fixes)
 
-### Before Audit
+### Before Audit Metrics
 
 - Firebase errors: **3 critical**
 - TypeScript `any` usage: **52 instances**
@@ -295,7 +295,7 @@ After completing the manual steps, verify:
 - Lint errors: **72**
 - Security rules: **Not configured**
 
-### After Completion
+### After Completion Metrics
 
 - Firebase errors: **0** ✅
 - TypeScript `any` usage: **~5 (justifiable)** ✅
@@ -307,7 +307,7 @@ After completing the manual steps, verify:
 
 ## 🚀 DEPLOYMENT READINESS
 
-### Code Status: ✅ PRODUCTION READY
+### Application Code Status: ✅ PRODUCTION READY
 
 - All TypeScript errors resolved
 - All UX issues fixed
@@ -320,7 +320,7 @@ After completing the manual steps, verify:
 - Firestore index not created
 - Environment variables need updating
 
-### Recommendation
+### Deployment Recommendation
 
 **Deploy to Vercel NOW** and complete the 3 manual Firebase steps afterward. The site will build successfully and be visually perfect. The Match Center and Hero Article will work once you deploy the rules and create the index.
 
@@ -336,20 +336,20 @@ After completing the manual steps, verify:
 
 ## 📞 NEXT STEPS
 
-### Immediate (Required for Full Functionality)
+### Immediate Actions (Required)
 
 1. Deploy Firebase security rules
-2. Create Firestore composite index  
+2. Create Firestore composite index
 3. Update environment variables
 
-### Soon (Recommended)
+### Short-term Action Items (Recommended)
 
 1. Test all pages thoroughly
 2. Run Lighthouse audit for performance score
 3. Set up Google Analytics events
 4. Configure Meta Pixel properly
 
-### Optional (Quality of Life)
+### Optional Polish (Quality of Life)
 
 1. Add publish scripts to `.eslintignore`
 2. Create custom 404 page
@@ -368,10 +368,10 @@ After completing the manual steps, verify:
 - ✅ User-friendly with improved UX
 - ✅ Well-documented and maintainable
 
-**All that's left is 15 minutes of manual Firebase configuration to unlock the full experience!**
+Final Note: All that's left is 15 minutes of manual Firebase configuration to unlock the full experience!
 
 ---
 
 **Questions?** Check `FIREBASE_SETUP.md` for detailed deployment instructions.
 
-**Let's make this the best Liverpool FC fan site on the internet! 🔴 YNWA**
+Let's make this the best Liverpool FC fan site on the internet! 🔴 YNWA
